@@ -13,5 +13,19 @@
     "collator"
   ],
   "author": "The Asia Foundation",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapmeld/myanmar-sort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mapmeld/myanmar-sort/issues"
+  },
+  "homepage": "https://github.com/mapmeld/myanmar-sort#readme"
 }
