@@ -1,5 +1,5 @@
 {
-  "name": "myanmar-collator",
+  "name": "myanmar-sort",
   "version": "1.0.0",
   "description": "Sort Myanmar / Burmese words",
   "main": "index.js",

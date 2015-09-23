@@ -1,20 +1,8 @@
 var fs = require('fs');
-
-var myanmarCSV = null;
-var myanmarCSVerror = null;
+var letters = require(__dirname + '/letters.json')
 
 function prepare (callback) {
-  if (myanmarCSV) {
-    return callback(myanmarCSVerror);
-  }
-  fs.readFile(__dirname + '/letters.csv', { encoding: 'utf-8' }, function (err, data) {
-    if (err) {
-      myanmarCSVerror = err;
-      return callback(err);
-    }
-    myanmarCSV = data.split("\n");
-    callback(null);
-  });
+  callback(null);
 }
 
 function myanmarSort (a, b) {
@@ -66,22 +54,24 @@ function myanmarSort (a, b) {
     // at least one starts without a letter... that's OK
   }
 
-  if (!myanmarCSV) {
-    // didn't load diacritic reference
-    throw 'run prepare and receive callback before sorting';
-  }
-
-  var aLargest = ['', 0, -1];
-  var bLargest = ['', 0, -1];
-
-  for (var m = 0; m < myanmarCSV.length; m++) {
-    if (a.length >= myanmarCSV[m].length && myanmarCSV[m].length > aLargest[1] && a.indexOf(myanmarCSV[m]) === 0) {
-      aLargest = [myanmarCSV[m], myanmarCSV[m].length, m];
+  var findInTree = function (a) {
+    var treePos = letters;
+    var aLargest = ['', 0, -1];
+    for (var ax = 0; ax < a.length; ax++) {
+      if (treePos[a[ax]]) {
+        aLargest[0] += a[ax];
+        treePos = treePos[a[ax]];
+      } else {
+        aLargest[1] = aLargest[0].length;
+        aLargest[2] = treePos["x"];
+        break;
+      }
     }
-    if (b.length >= myanmarCSV[m].length && myanmarCSV[m].length > bLargest[1] && b.indexOf(myanmarCSV[m]) === 0) {
-      bLargest = [myanmarCSV[m], myanmarCSV[m].length, m];
-    }
-  }
+    return aLargest;
+  };
+
+  var aLargest = findInTree(a);
+  var bLargest = findInTree(b);
 
   if (aLargest !== bLargest) {
     // one is better
