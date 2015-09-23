@@ -1,9 +1,4 @@
-var fs = require('fs');
 var letters = require(__dirname + '/letters.json')
-
-function prepare (callback) {
-  callback(null);
-}
 
 function myanmarSort (a, b) {
   var letters = [
@@ -83,8 +78,5 @@ function myanmarSort (a, b) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = {
-    prepare: prepare,
-    sort: myanmarSort
-  };
+  module.exports = myanmarSort;
 }
