@@ -1,0 +1,17 @@
+{
+  "name": "myanmar-collator",
+  "version": "1.0.0",
+  "description": "Sort Myanmar / Burmese words",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "myanmar",
+    "burmese",
+    "i18n",
+    "collator"
+  ],
+  "author": "The Asia Foundation",
+  "license": "MIT"
+}
