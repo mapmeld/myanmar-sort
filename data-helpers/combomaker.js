@@ -31,7 +31,8 @@ function myanmarSort (a, b) {
     'ဉ',
     'ဏ',
     'ဋ',
-    'ဦ'
+    'ဦ',
+    'ဧ'
   ];
   var diacritics = [
     'ြ',

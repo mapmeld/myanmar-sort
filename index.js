@@ -1,38 +1,49 @@
-var letters = require(__dirname + '/letters.json')
+var sortables = require(__dirname + '/letters.json')
 
 function myanmarSort (a, b) {
+  if (typeof a === 'function' && typeof b === 'undefined') {
+    // passing a function to obtain values
+    // return a myanmarSort function
+    return function (aobj, bobj) {
+      var aval = a(aobj);
+      var bval = a(bobj);
+      return myanmarSort(aval, bval);
+    }
+  }
+
   var letters = [
     // '', no more letters goes first
-    "က",
-    "ခ",
-    "ဂ",
-    "င",
-    "စ",
-    "ဆ",
-    "ဇ",
-    "ဉ",
-    "ည",
-    "ဋ",
-    "ဌ",
-    "ဏ",
-    "တ",
-    "ထ",
-    "ဒ",
-    "န",
-    "ပ",
-    "ဖ",
-    "ဗ",
-    "ဘ",
-    "မ",
-    "ယ",
-    "ရ",
-    "လ",
-    "ဝ",
-    "သ",
-    "ဟ",
-    "အ",
-    "ဥ",
-    "ဦ",
+    'က',
+    'ခ',
+    'ဂ',
+    'င',
+    'စ',
+    'ဆ',
+    'ဇ',
+    'ဉ',
+    'ည',
+    'ဋ',
+    'ဌ',
+    'ဏ',
+    'တ',
+    'ထ',
+    'ဒ',
+    'န',
+    'ပ',
+    'ဖ',
+    'ဗ',
+    'ဘ',
+    'မ',
+    'ယ',
+    'ရ',
+    'လ',
+    'ဝ',
+    'သ',
+    'ဟ',
+    'အ',
+    'ဥ',
+    'ဦ',
+    'ဧ'
   ];
 
   if (a === b) {
@@ -50,7 +61,7 @@ function myanmarSort (a, b) {
   }
 
   var findInTree = function (a) {
-    var treePos = letters;
+    var treePos = sortables;
     var aLargest = ['', 0, -1];
     for (var ax = 0; ax < a.length; ax++) {
       if (treePos[a[ax]]) {
@@ -58,7 +69,7 @@ function myanmarSort (a, b) {
         treePos = treePos[a[ax]];
       } else {
         aLargest[1] = aLargest[0].length;
-        aLargest[2] = treePos["x"];
+        aLargest[2] = treePos['x'];
         break;
       }
     }
@@ -68,7 +79,7 @@ function myanmarSort (a, b) {
   var aLargest = findInTree(a);
   var bLargest = findInTree(b);
 
-  if (aLargest !== bLargest) {
+  if (aLargest[2] !== bLargest[2]) {
     // one is better
     return aLargest[2] - bLargest[2];
   } else {

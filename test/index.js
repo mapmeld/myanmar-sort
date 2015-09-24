@@ -28,24 +28,28 @@ describe("sort", function() {
 
   it("handles state and region sort", function() {
     var states = [
-      'ကချင်ပြည်နယ်',
-      'ကယားပြည်နယ်',
-      'ကရင်ပြည်နယ်',
-      'ချင်းပြည်နယ်',
-      'စစ်ကိုင်းတိုင်းဒေသကြီး',
-      'တနင်္သာရီတိုင်းဒေသကြီး',
-      'ပဲခူးတိုင်းဒေသကြီး',
-      'မကွေးတိုင်းဒေသကြီး',
-      'မန္တလေးတိုင်းဒေသကြီး',
-      'မွန်ပြည်နယ်',
-      'ရခိုင်ပြည်နယ်',
-      'ရန်ကုန်တိုင်းဒေသကြီး',
-      'ရှမ်းပြည်နယ်',
-      'ဧရာဝတီတိုင်းဒေသကြီး'
-    ];
-    var ret = states.concat([]).sort(myanmarCollator.sort);
+      { name: 'ကချင်ပြည်နယ်' },
+      { name: 'ကယားပြည်နယ်' },
+      { name: 'ကရင်ပြည်နယ်' },
+      { name: 'ချင်းပြည်နယ်' },
+      { name: 'စစ်ကိုင်းတိုင်းဒေသကြီး' },
+      { name: 'တနင်္သာရီတိုင်းဒေသကြီး' },
+      { name: 'ပဲခူးတိုင်းဒေသကြီး' },
+      { name: 'မကွေးတိုင်းဒေသကြီး' },
+      { name: 'မန္တလေးတိုင်းဒေသကြီး' },
+      { name: 'မွန်ပြည်နယ်' },
+      { name: 'ရခိုင်ပြည်နယ်' },
+      { name: 'ရန်ကုန်တိုင်းဒေသကြီး' },
+      { name: 'ရှမ်းပြည်နယ်' },
+      { name: 'ဧရာဝတီတိုင်းဒေသကြီး' }
+    ].reverse();
+
+    var ret = states.concat([]);
+    ret = ret.sort(myanmarCollator(function(state) {
+      return state.name;
+    }));
     for (var r = 0; r < states.length; r++) {
-      states[r] === ret[r];
+      assert.equal(states[states.length - r - 1].name, ret[r].name);
     }
   });
 });
