@@ -82,6 +82,9 @@ function myanmarSort (a, b) {
   if (aLargest[2] !== bLargest[2]) {
     // one is better
     return aLargest[2] - bLargest[2];
+  } else if (aLargest[0].length === 0) {
+    // remove this foreign letter
+    return myanmarSort(a.substring(1), b.substring(1));
   } else {
     // chop off to the next letter, and continue
     return myanmarSort(a.replace(aLargest[0], ''), b.replace(bLargest[0], ''));
