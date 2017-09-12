@@ -1,5 +1,7 @@
 # myanmar-sort
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mapmeld/myanmar-sort.svg)](https://greenkeeper.io/)
+
 Sorting Myanmar / Burmese text is hard! This uses a big JSON tree to help you quickly sort in JavaScript.
 
 If you are sorting names, use the myanmar-names module instead! It will remove prefixes before passing them to this module.
